@@ -7,10 +7,16 @@ define root view entity zcarr_JAVASCRIPT as select from scarr
     key carrid as Carrid,
     @UI.lineItem: [{ position: 20 }]
     carrname as Carrname,
+    @UI.hidden: true
     concat(concat('javascript:window.open("',url),'","mypopup","popup")') as Url,
     @UI.lineItem: [{ position: 30, type: #WITH_URL, url: 'Url' }]
     'website' as Website,
-    concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.textContent.startsWith("',carrid),'")) {el.style.fontWeight="bold";}; })') as bold,
-     @UI.lineItem: [{ position: 30, type: #WITH_URL, url: 'bold' }]
+    @UI.hidden: true
+    concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.textContent.startsWith("',carrid),'")) {el.style.display="none";}; })') as hideurl,
+     @UI.lineItem: [{ position:40, type: #WITH_URL, url: 'hideurl'  }]
+    'hide' as hide,
+    @UI.hidden: true
+   concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.textContent.startsWith("',carrid),'")) {el.style.fontWeight="bold";}; })') as boldurl,
+     @UI.lineItem: [{ position: 50, type: #WITH_URL, url: 'boldurl'  }]
     'setbold' as setbold
 }
