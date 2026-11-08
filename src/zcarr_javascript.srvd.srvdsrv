@@ -1,0 +1,4 @@
+@EndUserText.label: 'scarr'
+define service ZCARR_JAVASCRIPT {
+  expose ZCARR_JAVASCRIPT;
+}
