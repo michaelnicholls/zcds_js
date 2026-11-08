@@ -1,0 +1,4 @@
+@EndUserText.label: 'calc js'
+define service ZCALC_JS {
+  expose ZCALC_JS;
+}
