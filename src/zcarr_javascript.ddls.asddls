@@ -12,11 +12,12 @@ define root view entity zcarr_JAVASCRIPT as select from scarr
     @UI.lineItem: [{ position: 30, type: #WITH_URL, url: 'Url' }]
     'website' as Website,
     @UI.hidden: true
-    concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.textContent.startsWith("',carrid),'")) {el.style.display="none";}; })') as hideurl,
+    concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.innerText.includes("\\t',carrid),'\\t")) {el.style.display="none";}; })') as hideurl,
      @UI.lineItem: [{ position:40, type: #WITH_URL, url: 'hideurl'  }]
     'hide' as hide,
     @UI.hidden: true
-   concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.textContent.startsWith("',carrid),'")) {el.style.fontWeight="bold";}; })') as boldurl,
+   concat(concat('javascript:document.querySelectorAll("tr").forEach((el,i)=> {if(el.innerText.includes("\\t',carrid),'\\t")) {el.style.fontWeight="bold";}; })') as boldurl,
+ 
      @UI.lineItem: [{ position: 50, type: #WITH_URL, url: 'boldurl'  }]
     'setbold' as setbold
 }
