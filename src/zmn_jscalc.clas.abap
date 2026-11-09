@@ -34,8 +34,8 @@ CLASS ZMN_JSCALC IMPLEMENTATION.
             res = 'Use Execute'
             formula_url = 'javascript:try { value=eval("' &&
             pa_formula && '"); } catch (error) {value=error.message;} ;' &&
-            'document.querySelectorAll("span").forEach((el,i)=> {if(el.innerText=="Use Execute"){el.innerText=value;}})'
-       "     'alert(value)'
+         "   'document.querySelectorAll("span").forEach((el,i)=> {if(el.innerText=="Use Execute"){el.innerText=value;}})'
+            'document.querySelectorAll("td")[2].childNodes[0].textContent=value;'
             runit = 'Execute' ) ).
            io_response->set_data( lt_data ).
           io_response->set_total_number_of_records( lines( lt_data ) ).
