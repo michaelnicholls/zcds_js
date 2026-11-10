@@ -3,6 +3,7 @@
 define custom entity ZCALC_JS
  with parameters pa_formula : zformula
 {
+@UI.hidden: true
   key line : abap.int4;
   @UI.lineItem: [{ position: 10 }]
   formula : zformula;

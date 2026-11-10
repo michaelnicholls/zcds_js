@@ -31,11 +31,11 @@ CLASS ZMN_JSCALC IMPLEMENTATION.
           IF lt_params IS NOT INITIAL.
             data(pa_formula) = lt_params[ parameter_name = 'PA_FORMULA' ]-value.
             lt_data = value #( ( line = 10 formula = pa_formula
-            res = 'Use Execute'
+            res = cl_abap_conv_in_ce=>uccp( '0000' ) && 'Use Execute'
             formula_url = 'javascript:try { value=eval("' &&
             pa_formula && '"); } catch (error) {value=error.message;} ;' &&
-         "   'document.querySelectorAll("span").forEach((el,i)=> {if(el.innerText=="Use Execute"){el.innerText=value;}})'
-            'document.querySelectorAll("td")[2].childNodes[0].textContent=value;'
+            'document.querySelectorAll("span").forEach((el,i)=> {if(el.innerText.startsWith("\0")){el.innerText="\0"+value;}})'
+         "   'document.querySelectorAll("td")[2].childNodes[0].textContent=value;'
             runit = 'Execute' ) ).
            io_response->set_data( lt_data ).
           io_response->set_total_number_of_records( lines( lt_data ) ).
