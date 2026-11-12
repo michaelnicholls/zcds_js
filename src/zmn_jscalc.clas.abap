@@ -28,6 +28,13 @@ CLASS ZMN_JSCALC IMPLEMENTATION.
           DATA(lv_offset) = lo_paging->get_offset(  ).
           DATA(lv_page_size) = lo_paging->get_page_size(  ).
           DATA(linecounter) = 0.
+                 " make a null character
+          DATA: lv_null_byte TYPE xstring VALUE '00',
+                lv_null_char TYPE string.
+          TRY.
+              lv_null_char = cl_abap_conv_codepage=>create_in( )->convert( source = lv_null_byte ).
+            CATCH cx_root.
+          ENDTRY.
           IF lt_params IS NOT INITIAL.
             data(pa_formula) = lt_params[ parameter_name = 'PA_FORMULA' ]-value.
             if contains( val = pa_formula sub = 'while' ) or  contains( val = pa_formula sub = 'for' ).
@@ -36,7 +43,8 @@ CLASS ZMN_JSCALC IMPLEMENTATION.
             formula_url = 'javascript:alert("No looping allowed" )' runit = '' ) ).
             else.
             lt_data = value #( ( line = 10 formula = pa_formula
-            res = cl_abap_conv_in_ce=>uccp( '0000' ) && 'Use Execute'
+           " res = cl_abap_conv_in_ce=>uccp( '0000' ) && 'Use Execute'
+            res = lv_null_char && 'Use Execute'
             formula_url = 'javascript:try { value=eval("' &&
             pa_formula && '"); } catch (error) {value=error.message;} ;' &&
             'document.querySelectorAll("span").forEach((el,i)=> {if(el.innerText.startsWith("\0")){el.innerText="\0"+value;}})'
